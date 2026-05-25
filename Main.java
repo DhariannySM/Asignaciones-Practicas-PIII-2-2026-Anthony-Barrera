@@ -2,68 +2,82 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        RegistroAgencia agencia = new RegistroAgencia(100); 
         int opcion = 0;
 
         do {
-            System.out.println("\n========================================");
-            System.out.println("          MENÚ DE APLICACIÓN          ");
-            System.out.println("========================================");
-            System.out.println("1. Calculadora básica");
-            System.out.println("2. Número par o impar");
-            System.out.println("3. Tabla de multiplicar");
-            System.out.println("4. Contador de vocales");
-            System.out.println("5. Promedio de notas");
-            System.out.println("6. Clase Estudiante");
-            System.out.println("7. Cuenta bancaria");
-            System.out.println("8. Herencia de vehículos");
-            System.out.println("9. Matriz 3x3");
-            System.out.println("10. Sistema básico de inventario");
-            System.out.println("11. Salir de la aplicación");
+            System.out.println("\n====================================");
+            System.out.println("      REGISTRO DE VEHÍCULOS");
+            System.out.println("====================================");
+            System.out.println("1. Registrar vehículo.");
+            System.out.println("2. Mostrar vehículos.");
+            System.out.println("3. Buscar vehículo por placa.");
+            System.out.println("4. Mostrar vehículos por marca.");
+            System.out.println("5. Salir.");
             System.out.print("Seleccione una opción: ");
-            
-            opcion = teclado.nextInt();
-            teclado.nextLine();
+
+            if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine(); 
+            } else {
+                System.out.println("\nPor favor, ingrese un número válido.");
+                scanner.nextLine(); 
+                continue; 
+            }
 
             switch (opcion) {
                 case 1:
-                    Calculadora.ejecutar(teclado);
+                    System.out.print("Ingrese la placa: ");
+                    String placa = scanner.nextLine();
+                    
+                    System.out.print("Ingrese la marca: ");
+                    String marca = scanner.nextLine();
+                    
+                    System.out.print("Ingrese el modelo: ");
+                    String modelo = scanner.nextLine();
+                    
+                    System.out.print("Ingrese el año: ");
+                    int year = scanner.nextInt();
+                    scanner.nextLine(); 
+                    
+                    System.out.print("Ingrese el color: ");
+                    String color = scanner.nextLine();
+                    
+                    System.out.print("Ingrese el precio: ");
+                    double precio = scanner.nextDouble();
+                    scanner.nextLine(); 
+
+                    Vehiculo nuevoVehiculo = new Vehiculo(placa, marca, modelo, year, color, precio);
+                    agencia.registrar(nuevoVehiculo);
                     break;
+                    
                 case 2:
-                    NumeroParImpar.ejecutar(teclado);
+                    agencia.mostrarTodos();
                     break;
+                    
                 case 3:
-                    TablaMultiplicar.ejecutar(teclado);
+                    System.out.print("Ingrese la placa a buscar: ");
+                    String placaBuscar = scanner.nextLine();
+                    agencia.buscarPorPlaca(placaBuscar);
                     break;
+                    
                 case 4:
-                    ContadorVocales.ejecutar(teclado);
+                    System.out.print("Ingrese la marca a buscar: ");
+                    String marcaBuscar = scanner.nextLine();
+                    agencia.mostrarPorMarca(marcaBuscar);
                     break;
+                    
                 case 5:
-                    PromedioNotasA.ejecutar(teclado);
+                    System.out.println("\nSaliendo del sistema... ¡Hasta luego!");
                     break;
-                case 6:
-                    Estudiante.ejecutar(teclado);
-                    break;
-                case 7:
-                    CuentaBancaria.ejecutar(teclado);
-                    break;
-                case 8:
-                    Automovil.ejecutar(teclado); 
-                    break;
-                case 9:
-                    Matriz3x3.ejecutar(teclado);
-                    break;
-                case 10:
-                    SistemaInventario.ejecutar(teclado);
-                    break;
-                case 11:
-                    System.out.println("Saliendo de la aplicación. ¡Hasta pronto!");
-                    break;
+                    
                 default:
-                    System.out.println("Opción no válida. Por favor, intente de nuevo.");
+                    System.out.println("\nOpción no válida. Intente de nuevo.");
             }
-        } while (opcion != 11);
-        
-        teclado.close(); 
-}
+
+        } while (opcion != 5);
+
+        scanner.close();
+    }
 }
