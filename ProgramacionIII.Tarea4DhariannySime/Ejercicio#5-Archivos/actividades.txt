@@ -1,0 +1,7 @@
+Estudiar Java
+Estudiar hilos
+Estudiar archivos
+Practicas hilos
+Practicar archivos
+Estudiar excepciones
+Estudiar Java
